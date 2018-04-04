@@ -1,0 +1,2 @@
+function Import-MarinaConfiguration {
+}

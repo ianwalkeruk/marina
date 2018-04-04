@@ -13,6 +13,12 @@ tool can follow up and create every viable image. Effectively the approach is to
 maintaining multiple images simple, allowing the balance to tip over to flexibility.
 
 ## FAQ
+* Why 'marina?'
+
+  Because it's a collection of docks, usually grouped together, providing a mixture of features
+  depending on the different needs of the boats it services. Also it's quite a nice little name
+  and I was pretty surprised it wasn't already in use!
+
 * Who are you?
 
   I'm a freelance DevOps platform engineer, currently working for a large internet retailer.
@@ -21,6 +27,16 @@ maintaining multiple images simple, allowing the balance to tip over to flexibil
 
   Because it's what I'm good at. Everything is PowerShell 6 compatible, and so it is
   cross-platform. Feel free to re-write it in something else if it upsets you!
+  
+* OMG! XML! The noughties called and they want their encoding back.
+
+  See above, regarding 'what I'm good at.' Also, Powershell has an annoying quirk when using
+  JSON, that it imports the file as an immutable object that has to be magically handwaved into
+  a form suitable for manipulation. Whereas XML support has been in PowerShell since the beginning
+  and it's very solid and comprehensive.
+  
+  There's a very deliberate design decision to explicitly load the configuration, which allows
+  for future expansion into loading alternative formats.
   
 * This has saved my bacon. How can I ever repay you?
 
