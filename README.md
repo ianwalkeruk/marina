@@ -21,7 +21,7 @@ maintaining multiple images simple, allowing the balance to tip over to flexibil
 
 * Who are you?
 
-  I'm a freelance DevOps platform engineer, currently working for a large internet retailer.
+  Ian W: I'm a freelance DevOps platform engineer, currently working for a large internet retailer.
  
 * Why is it written in PowerShell?
 
@@ -35,8 +35,9 @@ maintaining multiple images simple, allowing the balance to tip over to flexibil
   a form suitable for manipulation. Whereas XML support has been in PowerShell since the beginning
   and it's very solid and comprehensive.
   
-  There's a very deliberate design decision to explicitly load the configuration, which allows
-  for future expansion into loading alternative formats.
+  There's a very deliberate design decision to explicitly load the configuration into a memory-based
+  object, which allows for future expansion into loading alternative formats. If you are manually editing the
+  the configuration, then you're doing it wrong.
   
 * This has saved my bacon. How can I ever repay you?
 
