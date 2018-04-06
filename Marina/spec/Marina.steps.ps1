@@ -1,23 +1,27 @@
+$ValidXml = @'
+<?xml version="1.0" encoding="utf-8"?>
+<marina />
+'@
+
 BeforeEachScenario {
     $here = Split-Path -Parent $MyInvocation.MyCommand.ScriptBlock.File
     $moduleParent = Resolve-Path (Join-Path $here '..\..')
     Import-Module "$moduleParent\Marina"
-    
-    $script:ValidXml = @'
-<?xml version="1.0" encoding="utf-8"?>
-<marina />
-'@
 }
 
 Given 'we have a correctly-formatted (?<type>\S+) configuration file' {
     param ($type)
     $script:ConfigFolder = 'testdrive:\config'
     md $script:ConfigFolder
-    switch ($type) {
+    switch ($type.ToUpper()) {
         'XML' {
             $script:ConfigFileName = Join-Path $script:ConfigFolder 'correct.xml'
-            Set-Content $script:ConfigFileName -Value $Script:ValidXml
+            Set-Content -Path $script:ConfigFileName -Value $ValidXml
+            Write-Host "|$(Get-Content -Path $script:ConfigFileName)|"
             $script:ConfigFileName | Should Exist
+        }
+        default {
+            throw "Configuration file type |$type| not known"
         }
     }
 }

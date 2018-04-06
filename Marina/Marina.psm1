@@ -12,11 +12,21 @@ function Import-MarinaConfiguration {
         [switch]$Json        
     )
     process {
-        Write-Verbose "Using Parameter Set: $($PSCmdLet.ParameterSetName)"
+        $ret = New-Object -type MarinaConfiguration
+        switch ($PSCmdLet.ParameterSetName) {
+            'FromXmlFile' {
+                $x = [xml](Get-Content -Path $FileName)
+                $ret.ImportXml($x)
+            }
+        }
+        return $ret
     }
 }
 Export-ModuleMember -Function 'Import-MarinaConfiguration'
 
 Class MarinaConfiguration {
-    
+    [void]ImportXml ([xml]$xml) {
+        $root = $xml.documentelement
+        if ($root.name -ne 'marina') {throw "Invalid XML configuration"}        
+    }
 }
