@@ -21,7 +21,7 @@ maintaining multiple images simple, allowing the balance to tip over to flexibil
 
 * Who are you?
 
-  Ian W: I'm a freelance DevOps platform engineer, currently working for a large internet retailer.
+  I'm a freelance DevOps platform engineer, currently working for a large internet retailer.
  
 * Why is it written in PowerShell?
 
@@ -38,6 +38,17 @@ maintaining multiple images simple, allowing the balance to tip over to flexibil
   There's a very deliberate design decision to explicitly load the configuration into a memory-based
   object, which allows for future expansion into loading alternative formats. If you are manually editing the
   the configuration, then you're doing it wrong.
+  
+* I am in the 0.00027% of people who think using PowerShell and XML to control Docker is a goood idea.
+  What can I do to help?
+  
+  Write a feature specification for what you want to implement, then add Gherkin functions to the
+  steps file to test those specifications. Now run Invoke-Gherkin and add code until it's completely green,
+  then send a pull request.
+  
+  If you haven't worked this way before, it feels a bit weird to write tests for code that doesn't exist
+  but once you get the hang of it, you'll (hopefully) find that it keeps you focused on delivering what you
+  need and nothing extra.
   
 * This has saved my bacon. How can I ever repay you?
 
