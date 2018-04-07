@@ -6,10 +6,6 @@ BeforeEachFeature {
     Import-Module "$moduleParent\Marina"
 }
 
-BeforeEachScenario {
-    Import-Module "$moduleParent\Marina"
-}
-
 Given 'we have a correctly-formatted (?<type>\S+) configuration file' {
     param ($type)
     $ConfigFolder = 'testdrive:\config'
@@ -39,6 +35,6 @@ Then 'the configuration loads successfully' {
     $config | Should -Not -BeNullOrEmpty
 }
 
-AfterEachScenario {
+AfterEachFeature {
     Remove-Module 'Marina'
 }
