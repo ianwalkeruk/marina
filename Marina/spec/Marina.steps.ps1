@@ -7,7 +7,7 @@ BeforeEachFeature {
     
     $script:TestParameters = @{
         MarinaModule = @{
-            Add = @{Name = 'TestModule'; Path = (Join-Path $here 'TestModule').ToString()}
+            Add = @{Name = 'TestModule'; Path = 'testdrive:\TestModule'}
         }
         MarinaImageSet = @{
             Add = @{Name = 'TestImageSet'}
@@ -66,6 +66,12 @@ Then 'a (?<typename>\S+) object is returned' {
 And 'the number of (?<parentProperty>\S+) is (?<count>\d+)' {
     param ($parentProperty,$count)
     $parent.psobject.properties[$parentProperty].Count | Should -Be $count
+}
+
+Given 'a test module directory' {
+    $path = $testparameters.MarinaModule.Add.Path
+    mkdir $path
+    $path | Should -Exist
 }
 
 AfterEachFeature {
