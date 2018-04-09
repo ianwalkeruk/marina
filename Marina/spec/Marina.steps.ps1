@@ -45,12 +45,12 @@ Given 'a blank MarinaConfiguration object' {
 
 When 'Add-(?<typename>\S+) is called with no parameters' {
     param($typename)
-    $ret = $parent | &"Add-$typename"
+    $ret = $parent | & "Add-$typename"
 }
 
 Then 'a (?<typename>\S+) object is returned' {
     param ($typename)
-    $ret | Should -BeOfType &"[$typename]"
+    $ret.GetType().Name | Should -Be $typename
 }
 
 And 'the number of (?<parentProperty>\S+) is (?<count>\d+)' {
