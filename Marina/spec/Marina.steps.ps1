@@ -4,6 +4,15 @@ BeforeEachFeature {
     $script:ValidXml = Get-Content (Join-Path $here 'reference_config.xml')
     $script:moduleParent = Resolve-Path (Join-Path $here '..\..')
     Import-Module "$moduleParent\Marina"
+    
+    $script:TestParameters = @{
+        MarinaModule = @{
+            Add = @{Name = 'TestModule'; Path = (Join-Path $here 'TestModule').ToString()}
+        }
+        MarinaImageSet = @{
+            Add = @{Name = 'TestImageSet'}
+        }
+    }
 }
 
 Given 'we have a correctly-formatted (?<type>\S+) configuration file' {
@@ -43,9 +52,10 @@ Given 'a blank MarinaConfiguration object' {
     $parent = New-MarinaConfiguration
 }
 
-When 'Add-(?<typename>\S+) is called with no parameters' {
-    param($typename)
-    $ret = $parent | & "Add-$typename"
+When 'Add-(?<typename>\S+) is called with test parameters' {
+    param ($typename)
+    $params = $testparameters."$typename".Add
+    $ret = $parent | & "Add-$typename" @params
 }
 
 Then 'a (?<typename>\S+) object is returned' {
