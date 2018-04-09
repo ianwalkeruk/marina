@@ -9,6 +9,9 @@ BeforeEachFeature {
         MarinaModule = @{
             Add = @{Name = 'TestModule'; Path = 'testdrive:\TestModule'}
         }
+        MarinaModuleAlt = @{
+            Add = @{Name = 'TestModuleAlt'; Path = 'testdrive:\TestModuleAlt'}
+        }
         MarinaImageSet = @{
             Add = @{Name = 'TestImageSet'}
         }
@@ -52,9 +55,11 @@ Given 'a blank MarinaConfiguration object' {
     $parent = New-MarinaConfiguration
 }
 
-When 'Add-(?<typename>\S+) is called with test parameters' {
-    param ($typename)
-    $params = $testparameters."$typename".Add
+When 'Add-(?<typename>\S+) is called with (?<isAlt>alternate )?test parameters' {
+    param ($typename,$isAlt)
+    $testname = $typename
+    if ($isAlt) {$testname += 'Alt'}
+    $params = $testparameters."$testname".Add
     $ret = $parent | & "Add-$typename" @params
 }
 
@@ -65,11 +70,16 @@ Then 'a (?<typename>\S+) object is returned' {
 
 And 'the number of (?<parentProperty>\S+) is (?<count>\d+)' {
     param ($parentProperty,$count)
-    $parent.psobject.properties[$parentProperty].Count | Should -Be $count
+    $value = $parent.psobject.properties[$parentProperty].Value
+    $value.Count | Should -Be $count
 }
 
-Given 'a test module directory' {
-    $path = $testparameters.MarinaModule.Add.Path
+Given '(?:a|an) (?<testmode>alternate test|test) module directory' {
+    param ($testmode)
+    switch ($testmode) {
+        'test'           {$path = $testparameters.MarinaModule.Add.Path}
+        'alternate test' {$path = $testparameters.MarinaModuleAlt.Add.Path}
+    }
     mkdir $path
     $path | Should -Exist
 }
