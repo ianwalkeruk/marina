@@ -7,4 +7,3 @@ Feature: MarinaImageSet object behaviour
     When Add-MarinaImageSet is called with test parameters
     Then a MarinaImageSet object is returned
     And the number of ImageSets is 1
-    

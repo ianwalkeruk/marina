@@ -16,3 +16,4 @@ Feature: MarinaModule object behaviour
     When Add-MarinaModule is called with test parameters
     And Add-MarinaModule is called with alternate test parameters
     Then the number of Modules is 2
+    

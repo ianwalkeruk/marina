@@ -5,4 +5,5 @@ Feature: MarinaConfiguration object behaviour
   Scenario: Creating a blank configuration
     When New-MarinaConfiguration is called with no parameters
     Then a MarinaConfiguration object is returned
+
     
